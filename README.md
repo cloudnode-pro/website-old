@@ -1,5 +1,7 @@
 # website
-This is the front-end of Cloudnode's website, including the panel.
+This is the front-end of Cloudnode's website, including the panel. This repository does not include the API or any other back-end/server-side integrations.
+
+`/r/js/main.js` is a server-side generated file and is therefore not part of this repository. Our web server automatically applies `@media prefers-color-scheme` rules in `/r/css/main.css` based on files in `/r/css/themes`.
 
 # translations
 To translate content on our website please see [cloudnode-pro/translations](https://github.com/cloudnode-pro/translations) instead.
