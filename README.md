@@ -1,6 +1,9 @@
 # website
 This is the front-end of Cloudnode's website, including the panel.
 
+# translations
+To translate content on our website please see [cloudnode-pro/translations](https://github.com/cloudnode-pro/translations) instead.
+
 # LICENSE
 ```
 TrackingTeam License, Version 1.0 TrackingTeam License Version 1.0, April 2015
