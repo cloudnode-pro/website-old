@@ -1,7 +1,10 @@
 # website
-This is the front-end of Cloudnode's website, including the panel. This repository does not include the API or any other back-end/server-side integrations.
+This is the front-end of Cloudnode's website, including the panel. This repository does not include the API or any other back-end/server-side integrations. Some front-end pages that are not yet made publicly available may not appear in this repository.
 
 `/r/js/main.js` is a server-side generated file and is therefore not part of this repository. Our web server automatically applies `@media prefers-color-scheme` rules in `/r/css/main.css` based on files in `/r/css/themes`.
+
+# contribute
+Everyone is welcome to contribute to this project to helps us improve our web platform. To contribute, please fork the repository, make your commits and then open a pull request. We suggest that you become familiar with basic HTML, JavaScript, CSS and JSON concepts before suggesting any edits.
 
 # translations
 To translate content on our website please see [cloudnode-pro/translations](https://github.com/cloudnode-pro/translations) instead.
