@@ -44,6 +44,18 @@ main.api = {
             credentials: true
         })
     },
+    currency: function (input = "", callback = new Function) {
+        if (typeof input === "function") {
+            callback = input;
+            input = "";
+        }
+        else if (input.length > 0) input = `/${input}`;
+        $.get({
+            url: `https://${main.endpoints.api}/currency${input}`,
+            success: callback,
+            credentials: true
+        })
+    },
     account: {
         details: function () {},
         email: {
