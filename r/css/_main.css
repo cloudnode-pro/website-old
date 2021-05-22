@@ -741,7 +741,7 @@ li[data-bs-toggle="tooltip"] {
 	user-select: none;
 }
 
-.currency-select button span:nth-child(1) {
+.currency-select button span:first-child {
     width: 21px;
     height: 21px;
     line-height: 21px;
