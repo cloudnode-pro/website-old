@@ -70,5 +70,9 @@
 	"/credits.txt": {
 		"title": "Credits",
 		"src": "cmp:pages/credits.txt"	
+	},
+	"/jobs": {
+		"title": "Careers",
+		"src": "cmp:pages/jobs"	
 	}
 }
