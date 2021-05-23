@@ -107,6 +107,20 @@ main.init = function (app, $el, options = {}) {
 			let inputHistory = [];
 			for (let i in lines) lines[i] = `<div class="line">${MinecraftColorCodes.toHTML(lines[i])}</div>`;
 			$el.html(`<div class="console"><div class="console-view">${lines.join("")}</div><div class="console-input"><div class="input-group"><label class="input-group-text" for="consoleInput">${options.label}</label><input type="text" class="form-control px-0" placeholder="Type a command..." aria-label="${options.label}" id="consoleInput"></div></div></div>`);
+		},
+		dropdownSearch: function ($el) {
+			$el.addClass("dropdown-search");
+			$el.html(`<div class="px-2 pb-2"><input dropdown-search class="form-control form-control-sm form-control-light" palceholder="${main.langData.translate("search...")}"></div>${$el.html()}`);
+			$el.find("[dropdown-search]").input(function () {
+				let v = $(this).val().trim().toLowerCase();
+				$($el[0]).find("li").iterator(function ($li) {
+					if (!$($li).text().toLowerCase().includes(v)) $($li).addClass("d-none");
+					else $($li).removeClass("d-none");
+				});
+			});
+			$($el[0]).parent(".dropdown").on("shown.bs.dropdown", function () {
+				$($el[0]).find("[dropdown-search]").focus().val("").trigger("input");
+			});
 		}
 	}
 	if (typeof apps[app] === "function") return apps[app]($el, options);
