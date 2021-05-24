@@ -43,14 +43,17 @@ main.init = function (app, $el, options = {}) {
 			}
 		},
 		console: function ($el, options) {
-			if (typeof options !== "object") options = {text:"",callbacks:{},label:"$"};
-			if (typeof options.label !== "string") options.label = "$";
-			if (typeof options.text !== "string") options.text = "";
-			if (typeof options.callbacks !== "object") options.callbacks = {};
-			let lines = options.text.split("\n");
-			let inputHistory = [];
-			for (let i in lines) lines[i] = `<div class="line">${MinecraftColorCodes.toHTML(lines[i])}</div>`;
-			$el.html(`<div class="console"><div class="console-view">${lines.join("")}</div><div class="console-input"><div class="input-group"><label class="input-group-text" for="consoleInput">${options.label}</label><input type="text" class="form-control px-0" placeholder="Type a command..." aria-label="${options.label}" id="consoleInput"></div></div></div>`);
+			main.page.loadScriptOnce("/r/js/mc-colors.js", function () {
+				if (typeof options !== "object") options = {text:"",callbacks:{},label:"$"};
+				if (typeof options.label !== "string") options.label = "$";
+				if (typeof options.text !== "string") options.text = "";
+				if (typeof options.callbacks !== "object") options.callbacks = {};
+				let lines = options.text.split("\n");
+				let inputHistory = [];
+				for (let i in lines) lines[i] = `<div class="line">${main.MinecraftColorCodes.toHTML(lines[i])}</div>`;
+				$el.html(`<div class="console"><div class="console-view">${lines.join("")}</div><div class="console-input"><div class="input-group"><label class="input-group-text" for="consoleInput">${options.label}</label><input type="text" class="form-control px-0" placeholder="Type a command..." aria-label="${options.label}" id="consoleInput"></div></div></div>`);
+				if (typeof options?.callback === "function") options.callback($el, options);
+			});
 		},
 		dropdownSearch: function ($el) {
 			$el.addClass("dropdown-search");
