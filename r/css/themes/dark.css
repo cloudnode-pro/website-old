@@ -70,7 +70,6 @@ a:focus,
 }
 .navbar-light .navbar-brand {
     color: rgba(255, 255, 255, 0.9);
-    filter: invert(1);
 }
 .navbar-light .navbar-brand:focus, .navbar-light .navbar-brand:hover {
     color: rgba(255, 255, 255, 0.9);
