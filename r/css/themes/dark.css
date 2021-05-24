@@ -107,3 +107,7 @@ input:-webkit-autofill:focus, textarea:-webkit-autofill:focus, select:-webkit-au
     border-color: transparent;
     color: #fff9;
 }
+
+.navbar-light {
+	background-color: #1d1d1d;
+}
