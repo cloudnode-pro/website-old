@@ -4,8 +4,8 @@ main.currency = {
 	list: [undefined, null].includes(sessionStorage.currencies) ? {EUR:{iso: "EUR", symbol: "€", rate: 1, updated:0}} : JSON.parse(sessionStorage.currencies)
 }
 
-// check if currencies not cached or over 48 hours since update
-if ([undefined, null].includes(sessionStorage.currencies) || Date.now() - main.currency.list[main.currency.selected].updated > 1728e5) {
+// check if currencies not cached or over 24 hours since update
+if ([undefined, null].includes(sessionStorage.currencies) || Date.now() - main.currency.list[main.currency.selected].updated > 864e5) {
 	main.api.currency(function (data) {
 		sessionStorage.setItem("currencies", JSON.stringify(data));
 		main.currency.list = data;
