@@ -2,6 +2,9 @@ body {
 	background-color: #121212;
 	color: #f8f9fa;
 }
+img[src="/r/img/logo/logo-black.svg"] {
+    filter: invert(1);
+}
 .bg-gray-light {
 	background-color: #202125 !important;
 }
