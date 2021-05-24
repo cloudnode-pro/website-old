@@ -1,11 +1,11 @@
 /*
-	MinecraftColorCodes
-	Forked from https://github.com/FoxInFlame/MinecraftColorCodes and modified by https://github.com/williamd5
+	main.MinecraftColorCodes
+	Forked from https://github.com/FoxInFlame/main.MinecraftColorCodes and modified by https://github.com/williamd5
 */
-const MinecraftColorCodes = {
+main.MinecraftColorCodes = {
     toHTML: function(s) {
         let d = document.createElement("div");
-        return d.appendChild(MinecraftColorCodes.parseStyle(s)), d.innerHTML;
+        return d.appendChild(main.MinecraftColorCodes.parseStyle(s)), d.innerHTML;
     },
     styleMap: {
         "§4": "font-weight:normal;text-decoration:none;color:#ec0505",
@@ -31,7 +31,7 @@ const MinecraftColorCodes = {
     },
     applyCode: function(s, c) {
         let t = document.createElement("span");
-        for (let s of c) t.style.cssText += MinecraftColorCodes.styleMap[s] + ";";
+        for (let s of c) t.style.cssText += main.MinecraftColorCodes.styleMap[s] + ";";
         return t.innerHTML = s, t;
     },
     parseStyle: function(s) {
@@ -41,7 +41,7 @@ const MinecraftColorCodes = {
             a = document.createDocumentFragment();
         s = s.replace(/\n|\\n/g, "<br>");
         for (let e of n) r.push(s.indexOf(e)), s = s.replace(e, "\0\0");
-        if (r[0] !== 0) a.appendChild(MinecraftColorCodes.applyCode(s.substring(0, r[0]), []));
+        if (r[0] !== 0) a.appendChild(main.MinecraftColorCodes.applyCode(s.substring(0, r[0]), []));
         for (let c = 0; c < n.length; ++c) {
             if (2 === (t = r[c + 1] - r[c])) {
                 for (; 2 === t;) l.push(n[c]), t = r[++c + 1] - r[c];
@@ -50,7 +50,7 @@ const MinecraftColorCodes = {
             else l.push(n[c]);
             l.includes("§r") && (l = l.slice(l.lastIndexOf("§r") + 1));
             e = s.substring(r[c], r[c + 1]);
-            a.appendChild(MinecraftColorCodes.applyCode(e, l));
+            a.appendChild(main.MinecraftColorCodes.applyCode(e, l));
         }
         return a
     }
