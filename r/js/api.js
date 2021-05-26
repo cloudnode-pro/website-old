@@ -13,22 +13,40 @@ main.api = {
                 data: data,
                 success: function () {
                     callback(...arguments);
-                    if (typeof arguments[0] === "Object" && typeof arguments[0].errors === "undefined" && typeof arguments[0].token === "string") {
-                        main.session.token = arguments[0].token;
-                        localStorage.setItem("session_token", arguments[0].token);
-                    }
+                    if (typeof arguments[0] === "object" && typeof arguments[0].errors === "undefined" && typeof arguments[0].token === "string")
+                        main.api.session(arguments[0].token, function (data) {
+                            main.session = data;
+                            localStorage.setItem("__session", JSON.stringify(data));
+                        })
                 },
                 credentials: true
             });
         },
-        login: function () {},
+        login: function (email, password, mfa, callback = new Function) {
+            if (typeof mfa === "function") callback = mfa;
+            let data = {};
+            if (typeof email === "string") data.email = email;
+            if (typeof password === "string") data.password = password;
+            if (typeof mfa !== "undefined") data["2fa"] = mfa;
+            $.post({
+                url: `https://${main.endpoints.api}/auth/login`,
+                data: data,
+                success: function (r, x) {
+                    callback(...arguments);
+                    if (typeof r === "object" && typeof r.errors === "undefined" && typeof r.token === "string")
+                        main.api.session(r.token, function (data) {
+                            console.log(data);
+                            main.session = data;
+                            localStorage.setItem("__session", JSON.stringify(data));
+                        })
+                },
+                credentials: true
+            });
+        },
         oauth: {
             google: function () {},
             github: function () {},
             discord: function () {}
-        },
-        session: function () {
-            return ["list", {}, {}, {}];
         },
         logout: function () {}
     },
