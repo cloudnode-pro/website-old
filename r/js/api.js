@@ -32,7 +32,7 @@ main.api = {
                 url: `https://${main.endpoints.api}/auth/login`,
                 data: data,
                 success: function (r, x) {
-                    callback(...arguments);
+                    callback(r, x);
                     if (typeof r === "object" && typeof r.errors === "undefined" && typeof r.token === "string")
                         main.api.session(r.token, function (data) {
                             main.session = data;
