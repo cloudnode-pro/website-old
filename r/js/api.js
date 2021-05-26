@@ -35,7 +35,6 @@ main.api = {
                     callback(...arguments);
                     if (typeof r === "object" && typeof r.errors === "undefined" && typeof r.token === "string")
                         main.api.session(r.token, function (data) {
-                            console.log(data);
                             main.session = data;
                             localStorage.setItem("__session", JSON.stringify(data));
                         })
