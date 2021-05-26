@@ -16,6 +16,7 @@ main.api = {
                     if (typeof arguments[0] === "object" && typeof arguments[0].errors === "undefined" && typeof arguments[0].token === "string")
                         main.api.session(arguments[0].token, function (data) {
                             main.session = data;
+                            main.session.token = r.token;
                             localStorage.setItem("__session", JSON.stringify(data));
                         })
                 },
@@ -36,6 +37,7 @@ main.api = {
                     if (typeof r === "object" && typeof r.errors === "undefined" && typeof r.token === "string")
                         main.api.session(r.token, function (data) {
                             main.session = data;
+                            main.session.token = r.token;
                             localStorage.setItem("__session", JSON.stringify(data));
                         })
                 },
