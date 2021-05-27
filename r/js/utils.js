@@ -1,5 +1,5 @@
 main.page.toast = function (options) {
-	let id = Date.now();
+	let id = `toast${Date.now()}`;
 	if (typeof options !== "object") options = {};
 	if (typeof options.theme !== "object") options.theme = {};
 	if (typeof options.autohide !== "boolean") options.autohide = true;
@@ -47,16 +47,6 @@ function getRelativeTime (d1, d2 = new Date()) {
 			return rtf.format(Math.round(elapsed/units[u]), u)
 }
 
-function parseQuery (queryString) {
-    let query = {},
-    	pairs = (queryString[0] === '?' ? queryString.substr(1) : queryString).split('&');
-    for (let pair of pairs) {
-        pair = pair.split('=');
-        query[decodeURIComponent(pair[0])] = decodeURIComponent(pair[1] || '');
-    }
-    return query;
-}
-
 main.utils = {
 	readableBytes: function (input, suffix = "B") {
 		if (input < 1000) return `${input}${suffix}`;
@@ -64,5 +54,56 @@ main.utils = {
 			let i = Math.floor(Math.log(input) / Math.log(1000));
             return (input / Math.pow(1000, i) * 100) / 100 + ' KMGTP'.charAt(i) + suffix;
         }
+	},
+	parseQuery: function (queryString = location.search) {
+	    let query = {},
+	    	pairs = (queryString[0] === '?' ? queryString.substr(1) : queryString).split('&');
+	    for (let pair of pairs) {
+	        pair = pair.split('=');
+	        query[decodeURIComponent(pair[0])] = decodeURIComponent(pair[1] || '');
+	    }
+	    return query;
 	}
+}
+
+main.page.modal = function ({header, body, footer, options}) {
+	//hide any other open modals
+	const modals = $(".modal.show, .modal-backdrop.show");
+	modals.removeClass("show");
+	setTimeout(function () {
+		modals.remove();
+	}, 150)
+	if (typeof options !== "object") options = {};
+	if (typeof options.close !== "boolean") options.close = true;
+	let id = `modal${Date.now()}`;
+	let html = `<div class="modal fade" id="${id}" tabindex="-1" aria-labelledby="title${id}" aria-hidden="true"><div class="modal-dialog"><div class="modal-content">`;
+	if (typeof header === "string") header = {title:header};
+	if (typeof header === "object") html += `<div class="modal-header"><h5 class="modal-title" id="title${id}">${header.title}</h5>${(typeof header.close === "boolean" && header.close === false) || (typeof options.close === "boolean" && options.close === false) ? "" : '<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>'}</div>`;
+    if (typeof body === "string") html += `<div class="modal-body">${body}</div>`;
+    if (typeof footer !== "object") footer = {};
+    if (typeof footer.buttons !== "object" && typeof options.close === "boolean" && options.close === true) footer.buttons = [{
+    	class: "btn btn-secondary",
+    	close: true,
+    	text: "Close"
+    }];
+    else footer.buttons = [];
+    if (footer.buttons.length > 0) {
+    	html += `<div class="modal-footer">`;
+    	for (let button of footer.buttons) html += `<button type="button" class="${typeof button.class === "string" ? button.class : "btn btn-secondary"}"${typeof button.close === "boolean" && button.close === false ? "" : ' data-bs-dismiss="modal"'}>${button.text}</button>`
+    	html += `</div>`;
+    }
+	html += `</div></div></div>`;
+	let $modal = $("body").append(html).find(`#${id}`);
+	let modal = new bootstrap.Modal($modal[0], {
+		keyboard: options.close !== false,
+		focus: options.focus ?? true,
+		backdrop: options.close === false ? "static" : true
+	});
+	modal.show();
+
+	$modal.on("hidden.bs.modal", function () {
+		$modal.remove();
+	})
+
+    return [$modal, modal];
 }

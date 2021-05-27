@@ -111,3 +111,12 @@ input:-webkit-autofill:focus, textarea:-webkit-autofill:focus, select:-webkit-au
 .navbar-light {
 	background-color: #1d1d1d;
 }
+
+.modal-backdrop.show {
+    opacity: .85;
+}
+
+.modal-content {
+    background-color: #1d1d1d;
+    border: 0;
+}
