@@ -49,7 +49,12 @@ main.api = {
             github: function () {},
             discord: function () {}
         },
-        logout: function () {}
+        logout: function (callback = new Function) {
+            $.get({
+                url: `https://${main.endpoints.api}/auth/logout`,
+                success: callback
+            })
+        }
     },
     session: function (token = "", callback = new Function) {
         if (typeof token === "function") {
