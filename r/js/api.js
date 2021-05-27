@@ -52,8 +52,11 @@ main.api = {
         logout: function (callback = new Function) {
             $.get({
                 url: `https://${main.endpoints.api}/auth/logout`,
-                success: callback
-            })
+                success: callback,
+                credentials: true
+            });
+            localStorage.removeItem("__session");
+            main.session = {};
         }
     },
     session: function (token = "", callback = new Function) {
