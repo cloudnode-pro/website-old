@@ -50,7 +50,7 @@ main.api = {
             discord: function () {}
         },
         logout: function (callback = new Function) {
-            $.get({
+            $.post({
                 url: `https://${main.endpoints.api}/auth/logout`,
                 success: callback,
                 credentials: true
