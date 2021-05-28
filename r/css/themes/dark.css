@@ -120,3 +120,7 @@ input:-webkit-autofill:focus, textarea:-webkit-autofill:focus, select:-webkit-au
     background-color: #1d1d1d;
     border: 0;
 }
+.loader {
+    border-color: #ffffff26 !important;
+    border-top-color: #8ab4f8 !important;
+}

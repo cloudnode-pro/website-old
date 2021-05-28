@@ -767,3 +767,52 @@ li[data-bs-toggle="tooltip"] {
     max-height: 150px;
     overflow: auto;
 }
+
+.loader.lg {
+    width: 120px;
+    height: 120px;
+    border-width: 4px;
+}
+
+.loader {
+    border: 2px solid;
+    border-color: #00000026;
+    border-radius: 50%;
+    border-top-color: var(--bs-primary);
+    animation: loader-spin 1s linear infinite;
+}
+
+.btn.loading::after {
+	content: "";
+	width: 20px;
+	height: 20px;
+	display: block;
+	position: absolute;
+	left: 10px;
+	top: calc(50% - 10px);
+	border: 2px solid #ffffff40;
+	border-top-color: white;
+	border-radius: 50%;
+	animation: loader-spin 1s linear infinite;
+}
+
+.btn.loading {
+    position: relative;
+    font-size: 0;
+}
+
+.btn.loading::before {
+    content: attr(data-loading);
+    display: inline-block;
+    margin-left: 23px;
+    font-size: 1rem;
+}
+
+@keyframes loader-spin {
+	from {
+		transform: rotate(0deg);
+	}
+	to {
+		transform: rotate(360deg);
+	}
+}
