@@ -270,9 +270,15 @@ pre code {
 }
 
 code {
-	font-size: .875em;
-	color: #e91e63;
-	word-wrap: break-word
+    font-size: 80%;
+    color: #eaeaea;
+    word-wrap: break-word;
+    background-color: #1d1d1d;
+    padding: 2px 4px;
+    border-radius: 6px;
+    white-space: pre-wrap;
+    height: auto;
+    width: auto
 }
 
 a>code {
@@ -5679,8 +5685,8 @@ fieldset:disabled .btn {
 	border: 1px solid rgba(0, 0, 0, .2);
 	border-radius: .3rem;
 	outline: 0;
-	transform: translateY(50%);
-    margin-top: 50%
+	transform: translateY(-50%);
+    top: 50vh
 }
 
 .modal-backdrop {
@@ -5753,7 +5759,7 @@ fieldset:disabled .btn {
 @media (min-width:576px) {
 	.modal-dialog {
 		max-width: 500px;
-		margin: 1.75rem auto
+		margin: 0 auto
 	}
 	.modal-dialog-scrollable {
 		height: calc(100% - 3.5rem)
