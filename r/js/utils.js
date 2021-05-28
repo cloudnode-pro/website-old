@@ -79,7 +79,7 @@ main.page.modal = function ({header, body, footer, options}) {
 	let html = `<div class="modal fade" id="${id}" tabindex="-1" aria-labelledby="title${id}" aria-hidden="true"><div class="modal-dialog"><div class="modal-content">`;
 	if (typeof header === "string") header = {title:header};
 	if (typeof header === "object") html += `<div class="modal-header"><h5 class="modal-title" id="title${id}">${header.title}</h5>${(typeof header.close === "boolean" && header.close === false) || (typeof options.close === "boolean" && options.close === false) ? "" : '<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>'}</div>`;
-    if (typeof body === "string") html += `<div class="modal-body">${body}</div>`;
+    if (typeof body === "object") html += `<div class="modal-body${typeof body.class === "string" ? ` ${body.class}` : ""}">${body.content}</div>`;
     if (typeof footer !== "object") footer = {};
     if (typeof footer.buttons !== "object" && typeof options.close === "boolean" && options.close === true) footer.buttons = [{
     	class: "btn btn-secondary",
