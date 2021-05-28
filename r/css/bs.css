@@ -5686,7 +5686,9 @@ fieldset:disabled .btn {
 	border-radius: .3rem;
 	outline: 0;
 	transform: translateY(-50%);
-    top: 50vh
+    top: 50vh;
+    max-height: 90vh;
+    overflow: overlay
 }
 
 .modal-backdrop {
