@@ -33,3 +33,9 @@ $(document).on("main.page.print ready", function () {
 	    if (e.detail.scripts.includes("/r/js/bs.js")) main.uiUtils.enableTooltops();
 	});
 });
+
+$("form[action][method='get']").submit(function (e) {
+    e.preventDefault();
+    let $this = $(this);
+    main.page.pop(`${$this.attr("action")}?${$this.serialize()}`);
+});
