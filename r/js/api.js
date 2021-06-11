@@ -177,5 +177,11 @@ main.api = {
                 return callback(response, xhr);
             }
         })
+    },
+    stats: function (q = "", callback = new Function) {
+        $.get({
+            url: `https://${main.endpoints.api}/stats/${q}`,
+            success: callback
+        })
     }
 }
