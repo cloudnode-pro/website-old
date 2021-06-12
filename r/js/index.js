@@ -27,15 +27,22 @@ main.uiUtils = {
 
 if (localStorage.__session === undefined) main.uiUtils.fetchSession();
 
-$(document).on("main.page.print ready", function () {
+
+if (main.page.printed) whenPrinted();
+else $(document).on("main.page.printed", function () {
+	whenPrinted();
+});
+
+function whenPrinted () {
 	if (typeof bootstrap === "object") main.uiUtils.enableTooltops();
 	else $(document).on("main.page.scriptLoaded", function (e) {
 	    if (e.detail.scripts.includes("/r/js/bs.js")) main.uiUtils.enableTooltops();
 	});
-});
 
-$("form[action][method='get']").submit(function (e) {
-    e.preventDefault();
-    let $this = $(this);
-    main.page.pop(`${$this.attr("action")}?${$this.serialize()}`);
-});
+
+	$("form[action][method='get']").submit(function (e) {
+	    e.preventDefault();
+	    let $this = $(this);
+	    main.page.pop(`${$this.attr("action")}?${$this.serialize()}`);
+	});
+}
