@@ -7,15 +7,17 @@ main.page.pop = function (url) {
 }
 
 window.onpopstate = function (e) {
-	if (location.href.split("/").pop()[0] !== "#") main.page.load(location.pathname);
+	console.log(e);
+	if (event.state !== null) main.page.load(location.pathname);
 }
+
+main.page.registerPopHandlers = registerPopHandlers;
 
 function registerPopHandlers () {
 	$("a[href]").click(function (e) {
-		e.preventDefault()
 		let $this = $(this);
 		let url = new URL($this.attr("href"), location.href);
-		if ($this.attr("href").startsWith("#")) return;
+		if ($this.attr("href").startsWith("#") || $this.attr("href").startsWith(location.href.split("#")[0] + "#") || $this.attr("href").startsWith(location.pathname.split("#")[0] + "#")) return true;
 		else if (e.ctrlKey || $this.attr("target") === "_blank" || (url.hostname !== main.company.domain && !url.hostname.startsWith(`.${main.company.domain}`))) {
 			e.preventDefault();
 			return window.open($this.attr("href"));
