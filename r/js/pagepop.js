@@ -7,7 +7,6 @@ main.page.pop = function (url) {
 }
 
 window.onpopstate = function (e) {
-	console.log(e);
 	if (event.state !== null) main.page.load(location.pathname);
 }
 
