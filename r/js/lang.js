@@ -26,8 +26,8 @@ if (sessionStorage["languages.json"] === undefined || sessionStorage["languages.
         }
         sessionStorage.setItem("languages.json", JSON.stringify(response));
 
-        if (main.langData.languages[navigator.language.substr(0,2)] && localStorage.lang === undefined) main.lang = navigator.language.substr(0,2);
-        else if (main.langData.languages[localStorage.lang]) main.lang = localStorage.lang;
+        if (main.langData.languages[navigator.language.substr(0,2)] && main.cookies.lang === undefined) main.lang = navigator.language.substr(0,2);
+        else if (main.langData.languages[main.cookies.lang]) main.lang = main.cookies.lang;
 
         $.get({
             url: `https://${main.endpoints.git}/translations/translations/${main.lang}.json`,
@@ -49,8 +49,8 @@ else {
         translations: JSON.parse(sessionStorage["languages.translations"])
     }
 
-    if (main.langData.languages[navigator.language.substr(0,2)] && localStorage.lang === undefined) main.lang = navigator.language.substr(0,2);
-    else if (main.langData.languages[localStorage.lang]) main.lang = localStorage.lang;
+    if (main.langData.languages[navigator.language.substr(0,2)] && main.cookies.lang === undefined) main.lang = navigator.language.substr(0,2);
+    else if (main.langData.languages[main.cookies.lang]) main.lang = main.cookies.lang;
 
     for (let cb of main.langModuleLoadCallbacks) cb();
     main.langData.translate = replaceTemplates;
