@@ -31,13 +31,11 @@ function registerPopHandlers () {
 				}
 			});
 		}
-		else console.log($this)
 	});
 	$("[data-pop]").click(function () {
 		let url = $(this).attr("data-pop");
 		window.history.pushState({}, url, url);
 	});
-	console.log("pop registered")
 }
 
 registerPopHandlers();
