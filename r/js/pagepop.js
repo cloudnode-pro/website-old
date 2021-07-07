@@ -13,24 +13,31 @@ window.onpopstate = function (e) {
 main.page.registerPopHandlers = registerPopHandlers;
 
 function registerPopHandlers () {
-	$("a[href]").click(function (e) {
-		let $this = $(this);
-		let url = new URL($this.attr("href"), location.href);
-		if ($this.attr("href").startsWith("#") || $this.attr("href").startsWith(location.href.split("#")[0] + "#") || $this.attr("href").startsWith(location.pathname.split("#")[0] + "#")) return true;
-		else if (e.ctrlKey || $this.attr("target") === "_blank" || (url.hostname !== main.company.domain && !url.hostname.startsWith(`.${main.company.domain}`))) {
-			e.preventDefault();
-			return window.open($this.attr("href"));
+	$("a[href]").iterator(function ($this, i) {
+		if (!$this.hasAttribute("pop-registered")) {
+			$this.setAttribute("pop-registered", "");
+			$this.addEventListener("click", function (e) {
+				$this = $($this);
+				let url = new URL($this.attr("href"), location.href);
+				if ($this.attr("href").startsWith("#") || $this.attr("href").startsWith(location.href.split("#")[0] + "#") || $this.attr("href").startsWith(location.pathname.split("#")[0] + "#")) return true;
+				else if (e.ctrlKey || $this.attr("target") === "_blank" || (url.hostname !== main.company.domain && !url.hostname.startsWith(`.${main.company.domain}`))) {
+					e.preventDefault();
+					return window.open($this.attr("href"));
+				}
+				else {
+					e.preventDefault();
+					main.page.pop($this.attr("href"));
+					return false;
+				}
+			});
 		}
-		else {
-			e.preventDefault();
-			main.page.pop($this.attr("href"));
-			return false;
-		}
+		else console.log($this)
 	});
 	$("[data-pop]").click(function () {
 		let url = $(this).attr("data-pop");
 		window.history.pushState({}, url, url);
 	});
+	console.log("pop registered")
 }
 
 registerPopHandlers();
