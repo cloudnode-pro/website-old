@@ -52,7 +52,7 @@ main.utils = {
 		if (input < 1000) return `${input}${suffix}`;
 		else {
 			let i = Math.floor(Math.log(input) / Math.log(1000));
-            return (input / Math.pow(1000, i) * 100) / 100 + ' KMGTP'.charAt(i) + suffix;
+            return Math.round(input / Math.pow(1000, i) * 100) / 100 + ' KMGTP'.charAt(i) + suffix;
         }
 	},
 	parseQuery: function (queryString = location.search) {
